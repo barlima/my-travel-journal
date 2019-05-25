@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  app:
+    container_name: app
+    image: barlima/my-travel-journal-app:latest
+    volumes:
+      - './app:/usr/src/app'
+    environment:
+      - NODE_ENV=development
+  server:
+    container_name: server
+    image: nginx:latest
+    volumes:
+      - './config/nginx/nginx.conf:/etc/nginx/nginx.conf'
+    depends_on:
+      - app
+    ports:
+      - '80:80'
+      - '443:443'

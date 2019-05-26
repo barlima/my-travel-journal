@@ -6,8 +6,11 @@ services:
     image: barlima/my-travel-journal-app:latest
     volumes:
       - './app:/usr/src/app'
+      - './app/node_modules:/usr/src/app/node_modules'
     environment:
       - NODE_ENV=development
+    env_file:
+      - ./.env.development
   server:
     container_name: server
     image: nginx:latest

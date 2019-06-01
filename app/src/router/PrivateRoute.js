@@ -15,9 +15,9 @@ const PrivateRoute = ({
 
   useEffect(() => {
     if(!initialising) {
-      if(!authenticatedUser && user) {
-        const { email, displayName: name } = user;
-        dispatch(setUser({ email, name }));
+      if(!authenticatedUser && !error && user) {
+        const { uid, email, displayName: name } = user;
+        dispatch(setUser({ uid, email, name }));
       }
     }
   }, [user, initialising]);

@@ -1,17 +1,16 @@
 import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { login, logout, auth } from '../../context/actions/auth';
+import { login } from '../../context/actions/auth';
 
-const Login = () => {
-  const [user, initialising, error] = useAuthState(auth());
+const Login = ({ history }) => {
+  
+  const handleLogin = async () => {
+    const { user } = await login();
+    if(user) history.push('/journal');
+  }
 
   return (
     <div>
-      <button onClick={login}>Login</button>
-      <button onClick={logout}>Logout</button>
-      {
-        user && <p>{user.email}</p>
-      }
+      <button onClick={handleLogin}>Login</button>
     </div>
   )
 };

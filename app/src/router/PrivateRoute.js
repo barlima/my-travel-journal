@@ -4,25 +4,25 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../context/actions/auth';
 import { setUser } from '../context/actions/user';
 import UserContext from '../context/userContext';
+import Header from '../components/Header';
 
 const PrivateRoute = ({ 
   component: Component, 
   ...rest
 }) => {
   const [ user, initialising, error ] = useAuthState(auth());
-  const [ currentUser, dispatch ] = useContext(UserContext);
+  const [ authenticatedUser, dispatch ] = useContext(UserContext);
 
   useEffect(() => {
     if(!initialising) {
-      if(!currentUser && user) {
+      if(!authenticatedUser && user) {
         const { email, displayName: name } = user;
         dispatch(setUser({ email, name }));
       }
     }
   }, [user, initialising]);
 
-
-  if(initialising && !currentUser) {
+  if(!authenticatedUser) {
     return <p>Loading...</p>
   }
 
@@ -30,6 +30,7 @@ const PrivateRoute = ({
     <Route {...rest} component={(props) => (
       user ? (
         <div>
+          <Header />
           <Component {...props} />
         </div>
       ) : (

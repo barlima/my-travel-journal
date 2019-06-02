@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  padding: 3%;
+}

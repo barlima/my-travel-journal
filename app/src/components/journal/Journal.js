@@ -1,8 +1,17 @@
 import React, { useContext } from 'react';
+import styled from 'styled-components';
 import { useListVals } from 'react-firebase-hooks/database';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import database from '../../firebase/firebase';
+import JourneyCard from '../journeys/JourneyCard';
+
+const Content = styled.div`
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
+`
 
 const Journal = () => {
   const [ user, _ ] = useContext(UserContext);
@@ -13,21 +22,11 @@ const Journal = () => {
   }
 
   return (
-    <div>
-      Journal
-      <Link to="/journey/new">
-        <button>
-          Add new journey
-        </button>
-      </Link>
+    <Content>
       {
-        journeys.map(journey => (
-          <div>
-            {journey.name}
-          </div>
-        ))
+        journeys.map(journey => <JourneyCard journey={journey} />)
       }
-    </div>
+    </Content>
   )
 }
 

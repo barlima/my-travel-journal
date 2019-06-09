@@ -6,7 +6,6 @@ import PrivateRoute from './PrivateRoute';
 import LandingPage from '../components/LandingPage';
 import Login from '../components/auth/Login';
 import Journal from '../components/journal/Journal';
-import NewJourney from '../components/journeys/NewJourney';
 
 export const history = createBrowserHistory();
 
@@ -17,7 +16,6 @@ const AppRouter = () => {
       <Switch>
         <Route          path="/login"         component={Login} />
         <PrivateRoute   path='/journal'       component={Journal} />
-        <PrivateRoute   path='/journey/new'   component={NewJourney} />
         <PrivateRoute   path="/"              component={LandingPage} />
       </Switch>
     </Router>

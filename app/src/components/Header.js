@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { withRouter } from "react-router";
 import { Link } from 'react-router-dom';
 import { logout } from '../context/actions/auth';
+import { Icon } from 'semantic-ui-react';
+import NewJourney from './journeys/NewJourney';
 
 const Menu = styled.div`
 display: flex;
@@ -11,6 +13,7 @@ width: 100%;
 height: 60px;
 background: ${p => p.theme.colors.primary};
 border-radius: 8px;
+margin-bottom: 30px;
 `
 
 const Options = styled.div`
@@ -20,7 +23,7 @@ flex-direction: row;
 padding: 0 10px;
 
 &:last-of-type {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 `
 
@@ -98,6 +101,17 @@ const Header = ({ match }) => {
       </Options>
 
       <Options>
+        {
+          match.url === '/journal' ? (
+            <Option>
+              <NewJourney>
+                <Button><Icon name="plus square" />Add</Button>
+              </NewJourney>
+            </Option>    
+          ) : (
+            <div/>
+          )
+        }
         <Option>
           <Button onClick={logout}>Logout</Button>
         </Option>
